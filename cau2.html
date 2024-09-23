@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm Tra Số Hoàn Hảo</title>
+</head>
+<body>
+<h1>Kiểm Tra Số Hoàn Hảo</h1>
+<input type="number" id="numberInput" placeholder="Nhập số nguyên dương" />
+<button id="checkButton">Kiểm tra</button>
+<p id="result"></p>
+<script>
+    function isPerfectNumber(n) {
+        if (n <= 0) return false;
+        let sum = 0;
+        for (let i = 1; i <= n / 2; i++) {
+            if (n % i === 0) {
+                sum += i;
+            }
+        }
+        return sum === n;
+    }
+    function displayResult(isPerfect, num) {
+        const resultElement = document.getElementById("result");
+        resultElement.textContent = `Số ${num} có phải là số hoàn hảo không? ${isPerfect}`;
+    }
+    function validateInput(input) {
+        const num = parseInt(input, 10);
+        return !isNaN(num) && num > 0 ? num : null;
+    }
+    document.getElementById("checkButton").addEventListener("click", () => {
+        const inputValue = document.getElementById("numberInput").value;
+        const num = validateInput(inputValue);
+
+        if (num === null) {
+            displayResult(false, "vui lòng nhập một số nguyên dương hợp lệ");
+        } else {
+            const isPerfect = isPerfectNumber(num);
+            displayResult(isPerfect, num);
+        }
+    });
+</script>
+</body>
+</html>
